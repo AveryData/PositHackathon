@@ -1,0 +1,67 @@
+---
+title: "Posit Bake Off Challenge"
+author: "Avery Smith"
+server: shiny
+format: 
+  revealjs:
+    theme: solarized
+    scrollable: true
+---
+
+## Matplotlib
+
+For a demonstration of a line plot on a polar axis, see @fig-polar.
+
+```{python}
+#| label: fig-polar
+#| fig-cap: "A line plot on a polar axis"
+#| echo: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(
+subplot_kw = {'projection': 'polar'}
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+## Shiny example
+
+
+```{python}
+
+from shiny.express import input, render, ui
+
+ui.input_text("name", "What's your name?", value="World")
+
+@render.text
+def greeting():
+    return f"Hello, {input.name()}!"
+
+```
+
+## Plotly Example
+
+::: {.incremental}
+
+- Eat spaghetti
+- Drink wine
+
+```{python}
+#| echo: true
+#| output-location: fragment
+import plotly.express as px
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
+fig.show()
+```
+:::
+
+## Air Quality
+
